@@ -1,17 +1,23 @@
-function sumar() {
-    
-    var n1 = prompt("Ingresa Un nro: ");
-    var n2 = prompt("Ingresa Otro nro: ");
-    console.log("El resultado de la operación es: "+(parseInt(n1)+parseInt(n2)))
-}
-
-var dias = ["Lunes", "Martes", "Miercoles",
-"Jueves", "Viernes", "Sabado", "Domingo"]
 
 
+var dias = ["Lunes", "Martes", "Miercoles","Jueves", "Viernes", "Sabado", "Domingo"]
 function diasSemana() {
-    debugger;
-    for(var i = 0; i<7; i++){
+    for(var i = 0; i <= 7; i++){
+        
         console.log(dias[i]);
+        switch (i) {
+            case 0:
+                alert(dias[i]+" Un día PAR - Día Numero - " + i);
+                continue;
+            case 2:
+                alert(dias[i]+" Un día PAR - Día Numero - " + i);
+                continue;
+            case 4:
+                alert(dias[i]+" Un día PAR - Día Numero - " + i);
+                continue;
+            case 6:
+                alert(dias[i]+" Un día PAR - Día Numero - " + i);
+                continue;
+        }
     }
 }

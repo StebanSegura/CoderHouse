@@ -13,10 +13,10 @@ function calcularCuota()
 	interes = ( (interes/100) / 12);
 
 	//Calcular 
-	var cuota= (prestamo * interes) / (1 - Math.pow( (1+interes) , (-meses) ) );
+	var cuota = (prestamo * interes) / (1 - Math.pow( (1+interes) , (-meses) ) );
 
 	//Función Round
-	cuota= (Math.round(cuota*100) /100).toFixed(2);
+	cuota = (Math.round(cuota*100) /100).toFixed(2);
 
 	//Validación Campos
 	if (isNaN(cuota) || cuota == "Infinity" || cuota == 0)

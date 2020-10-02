@@ -24,6 +24,188 @@
     <link rel="stylesheet" href="css/slick.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        window.onload = function () {
+            // Variables
+            let baseDeDatos = [
+                {
+                    id: 1,
+                    nombre: 'Quartz Belt Watch',
+                    precio: 150.00,
+                    imagen: 'img/product/product_1.png'
+                },
+                {
+                    id: 2,
+                    nombre: 'Quartz Belt Watch',
+                    precio: 150.00,
+                    imagen: 'img/product/product_2.png'
+                },
+                {
+                    id: 3,
+                    nombre: 'Quartz Belt Watch',
+                    precio: 150.00,
+                    imagen: 'img/product/product_3.png'
+                },
+                {
+                    id: 4,
+                    nombre: 'Quartz Belt Watch',
+                    precio: 150.00,
+                    imagen: 'img/product/product_4.png'
+                }
+
+            ]
+            
+            //DOM
+            let $items = document.querySelector('#items');
+            let $carrito = document.querySelector('#carrito');
+            let $total = document.querySelector('#total');
+            let $botonVaciar = document.querySelector('#boton-vaciar');
+            
+            //Carrito y Total
+            let carrito = [];
+            let total = 0;
+
+            // Funciones
+            function renderItems() {
+                for (let info of baseDeDatos) {
+                    // Estructura
+                    let miNodo = document.createElement('div');
+                    miNodo.classList.add('single_product_item');
+
+                    // Imagen
+                    let miNodoImagen = document.createElement('img');
+                    miNodoImagen.setAttribute('src', info['imagen']);
+                   
+                    // Body
+                    let miNodoCardBody = document.createElement('div');
+                    miNodoCardBody.classList.add('single_product_text');
+                    
+                    // Titulo
+                    let miNodoTitle = document.createElement('h4');
+                    miNodoTitle.textContent = info['nombre'];
+
+                    // Precio
+                    let miNodoPrecio = document.createElement('h3');
+                    miNodoPrecio.textContent = info['precio'] + '€';
+
+                    // Boton 
+                    let miNodoBoton = document.createElement('a');
+                    miNodoBoton.classList.add('add_cart');
+                    miNodoBoton.textContent = '+ Agregar';
+                    miNodoBoton.setAttribute('marcador', info['id']);
+                    miNodoBoton.addEventListener('click', anyadirCarrito);
+
+                    //Like
+                    let miNodoLike = document.createElement('i');
+                    miNodoBoton.classList.add('ti-heart');
+                   
+                    // Insertamos
+
+                    $items.appendChild(miNodo);
+                    miNodo.appendChild(miNodoImagen);
+                    miNodo.appendChild(miNodoCardBody);
+
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodoBoton.appendChild(miNodoLike);
+                }
+            }
+
+            
+            function anyadirCarrito () {
+                // Anyadimos el Nodo a nuestro carrito
+                carrito.push(this.getAttribute('marcador'))
+                // Calculo el total
+                calcularTotal();
+                // Renderizamos el carrito 
+                renderizarCarrito();
+            }
+
+            function renderizarCarrito() {
+                // Vaciamos todo el html
+                $carrito.textContent = '';
+                // Quitamos los duplicados
+                let carritoSinDuplicados = [...new Set(carrito)];
+                // Generamos los Nodos a partir de carrito
+                carritoSinDuplicados.forEach(function (item, indice) {
+                    // Obtenemos el item que necesitamos de la variable base de datos
+                    let miItem = baseDeDatos.filter(function(itemBaseDatos) {
+                        return itemBaseDatos['id'] == item;
+                    });
+                    // Cuenta el número de veces que se repite el producto
+                    let numeroUnidadesItem = carrito.reduce(function (total, itemId) {
+                        return itemId === item ? total += 1 : total;
+                    }, 0);
+                    // Creamos el nodo del item del carrito
+                    let miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0]['nombre']} - ${miItem[0]['precio']}€`;
+                    // Boton de borrar
+                    let miBoton = document.createElement('button');
+                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    miBoton.textContent = 'X';
+                    miBoton.style.marginLeft = '1rem';
+                    miBoton.setAttribute('item', item);
+                    miBoton.addEventListener('click', borrarItemCarrito);
+                    // Mezclamos nodos
+                    miNodo.appendChild(miBoton);
+                    $carrito.appendChild(miNodo);
+                })
+            }
+
+            function borrarItemCarrito() {
+                console.log()
+                // Obtenemos el producto ID que hay en el boton pulsado
+                let id = this.getAttribute('item');
+                // Borramos todos los productos
+                carrito = carrito.filter(function (carritoId) {
+                    return carritoId !== id;
+                });
+                // volvemos a renderizar
+                renderizarCarrito();
+                // Calculamos de nuevo el precio
+                calcularTotal();
+            }
+
+            function calcularTotal() {
+                // Limpiamos precio anterior
+                total = 0;
+                // Recorremos el array del carrito
+                for (let item of carrito) {
+                    // De cada elemento obtenemos su precio
+                    let miItem = baseDeDatos.filter(function(itemBaseDatos) {
+                        return itemBaseDatos['id'] == item;
+                    });
+                    total = total + miItem[0]['precio'];
+                }
+                // Formateamos el total para que solo tenga dos decimales
+                let totalDosDecimales = total.toFixed(2);
+                // Renderizamos el precio en el HTML
+                $total.textContent = totalDosDecimales;
+            }
+
+            function vaciarCarrito() {
+                // Limpiamos los productos guardados
+                carrito = [];
+                // Renderizamos los cambios
+                renderizarCarrito();
+                calcularTotal();
+            }
+
+            // Eventos
+            $botonVaciar.addEventListener('click', vaciarCarrito);
+
+            // Inicio
+            renderItems();
+        } 
+    </script>
+
+
+
+
 </head>
 
 <body>
@@ -136,6 +318,37 @@
     </section>
     <!-- banner part start-->
 
+
+                            <!-- Elementos generados a partir del JSON -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="">
+                                        <div class="single_product_list_slider">
+                                            <div class="row align-items-center justify-content-between">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <main id="items"></main>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                    
+                            
+                            <!-- Carrito -->
+                            <aside class="col-sm-4">
+                                <h2>Carrito</h2>
+                                <!-- Elementos del carrito -->
+                                <ul id="carrito" class="list-group"></ul>
+                                <hr>
+                                <!-- Precio total -->
+                                <p class="text-right">Total: <span id="total"></span>&euro;</p>
+                                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                            </aside>
+            
+            
+
+
+
     <!-- product_list start-->
     <section class="product_list section_padding">
         <div class="container">
@@ -148,19 +361,12 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="product_list_slider owl-carousel" data-interval="false">
+                    <div class="product_list_slider owl-carousel">
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
-                                <div class="col-lg-3 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="img/product/product_1.png" alt="">
-                                        <div class="single_product_text">
-                                            <h4>Quartz Belt Watch</h4>
-                                            <h3>$150.00</h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+
+
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
                                         <img src="img/product/product_2.png" alt="">

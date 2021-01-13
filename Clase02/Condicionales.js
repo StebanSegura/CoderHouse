@@ -9,7 +9,7 @@ if (parseInt(numero) > 1000){
 
 var palabra = prompt("Ingresa un Saludo: ");
 palabra = palabra.toLowerCase();
-if (palabra == 'hola'){
+if (palabra == 'HOLA'){
     console.log(palabra+" es un saludo muy basico")
 }
 

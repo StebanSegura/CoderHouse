@@ -3,8 +3,8 @@
 var mensaj = "Bienvenido al Curso!!!\n";
 
 //Solicitud de valores
-var nombre = prompt("Escribe Tu Nombre");
-var apellido = prompt("Escribe Tu Apellido");
+var nombre = prompt("Escribe Tus Nombres");
+var apellido = prompt("Escribe Tus Apellidos");
 
 alert(mensaj+nombre);
 

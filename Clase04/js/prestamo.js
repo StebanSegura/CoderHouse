@@ -1,3 +1,5 @@
+
+
 function calcularCuota()
 {
 	var prestamo = document.getElementById("prestamo").value;

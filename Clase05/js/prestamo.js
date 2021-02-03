@@ -35,5 +35,31 @@ function calcularCuota()
 				document.getElementById("nombreid").innerHTML=info[0];
 				document.getElementById("valorid").innerHTML=info[1];
 
+		var PersonaUno = new Procesar(document.getElementById("nombre").value, 
+									  document.getElementById("apellido").value, 
+									  document.getElementById("prestamo").value);
+									  
+		msg = 'Señor(a) El Prestamos Esta En Proceso';
+		alert(msg);
+		
+		PersonaUno.mostrarDatos();
+
 	}
-} 
+}
+
+function Procesar (p_nombre, p_apellido, p_prestamos) {
+
+	this.nombre = p_nombre;
+	this.apellido = p_apellido;
+	this.prestamo = p_prestamos;
+	
+	///Metodo
+	this.mostrarDatos = function () {
+	
+			var msg = 'Los Datos De La Solicitod Son Nombre:   ' + this.nombre;
+			msg = msg + ';   Apellidos:   ' + this.apellido + ';   Valor Prestamo:   ' + this.prestamo;
+			alert(msg);
+			}
+	
+	}
+

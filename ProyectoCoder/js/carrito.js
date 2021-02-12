@@ -9,7 +9,7 @@ class Carrito {
         if (e.target.classList.contains('agregar-carrito')) {
 
             const producto = e.target.parentElement.parentElement;
-            this.leerDatosProducto(producto);            
+            this.leerDatosProducto(producto);     
         }
     }
 
@@ -25,28 +25,26 @@ class Carrito {
             cantidad: 1
 
         }
+        this.insertarCarrito(infoProducto)
     }
 
-    //Mostrar los productos guardados
+    //Muestra producto seleccionado en carrito
     insertarCarrito(producto){
-            
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>
-                    <img src="${producto.imagen}" width=100>
-                </td>
-                <td>${producto.titulo}</td>
-                <td>${producto.precio}</td>
-                <td>
-                    <input type="number" class="form-control cantidad" min="1" value=${producto.cantidad}>
-                </td>
-                <td id='subtotales'>${producto.precio * producto.cantidad}</td>
-                <td>
-                    <a href="#" class="borrar-producto fas fa-times-circle" style="font-size:30px" data-id="${producto.id}"></a>
-                </td>
-            `;
-            listaProductos.appendChild(row);
-        };
-    }
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <img src="" width=60>
+            </td>
+            <td>${producto.titulo}</td>
+            <td>${producto.precio}</td>
+            <td>
+                <a href="#" class="borrar-producto fas fa-times-circle" data-id="${producto.id}"></a>
+            </td>
+        `;
+        console.log(producto.imagen);
+        console.log(producto.titulo);
+        console.log(producto.precio);
 
+        listaProductos.appendChild(row);
+    }
 }

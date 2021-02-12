@@ -40,24 +40,31 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Carrito<small class="text-gray">(2)</small>
+                  </a>
+                  <div  id="carrito" class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
+                    <table id="lista-carrito" class="table">
+                      <thead>
+                          <tr>
+                              <th>Imagen</th>
+                              <th>Nombre</th>
+                              <th>Precio</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+                  <a href="#" id="vaciar-carrito" class="btn btn-primary btn-block">Vaciar Carrito</a>
+                  <a href="cart.html" id="procesar-pedido" class="btn btn-danger btn-block">ProcesarCompra</a>
+                </li>
                 <li class="nav-item">
                   <!-- Link--><a class="nav-link active" href="index.html">Inicio</a>
                 </li>
               </ul>
-              <ul class="navbar-nav ml-auto">               
-                <li class="nav-item"><a class="nav-link" href="cart.html"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Carrito<small class="text-gray">(2)</small></a></li>
-
-              
-              
-              
-              
-              
-              </ul>
             </div>
           </nav>
-
-
-
         </div>
       </header>
       <!--  Modal -->
@@ -112,18 +119,17 @@
           </div>
         </section>
         <!-- TRENDING PRODUCTS-->
-        <div class="container" id="lista-productos">
         <section class="py-5">
           <header>
             <p class="small text-muted small text-uppercase mb-1">Made the hard way</p>
             <h2 class="h5 text-uppercase mb-4">Top trending products</h2>
           </header>
-          <div class="row">
-            <!-- PRODUCT-->
+          <div class="row" id="lista-productos">
+            <!-- PRODUCT-->    
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="product text-center">
                 <div class="position-relative mb-3">
-                  <div class="badge text-white badge-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100" src="img/product-1.jpg" alt="..."></a>
+                  <div class="badge text-white badge-"></div><a class="d-block" href="detail.html"><img class="img-fluid w-100 img" src="img/product-1.jpg" alt="..."></a>
                 </div>
                 <h6> <a class="reset-anchor" href="detail.html">Kui Ye Chen’s AirPods</a></h6>
                 <p class="small text-muted precio"><span>$250</span></p>
@@ -235,7 +241,6 @@
             </div>
           </div>
         </section>
-        </div>
       </div>
       <footer class="bg-dark text-white">
         <div class="container py-4">

@@ -75,3 +75,4 @@ $.getJSON('js/countries.json', function (data) {
         $("select.country").append(selectOption);
     });
 })
+
